@@ -58,12 +58,15 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Name="Border"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Background="{TemplateBinding Control.Foreground}"
-                                BorderThickness="0,5">
-                            <Rectangle Fill="{TemplateBinding Control.Foreground}" />
+                        <Border Background="Transparent">
+                            <Border Name="Border"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Background="Transparent"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    IsHitTestVisible="True">
+                                <Rectangle Fill="{TemplateBinding Foreground}" />
+                            </Border>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>

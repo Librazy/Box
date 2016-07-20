@@ -53,7 +53,7 @@ namespace LiCalculatorWPF
                     GameGrid.Children.Add(b);
                 }
             }
-            var rec = new Button() { Style = (Style)FindResource("LineButton"), };
+            var rec = new Button() { Style = (Style)FindResource("LineButton"),BorderThickness = new Thickness(0,5,0,5) };
             rec.Command = LineButtonClick;
             rec.MouseEnter += new MouseEventHandler(LineButtonOnME);
             rec.MouseLeave += new MouseEventHandler(LineButtonOnML);
