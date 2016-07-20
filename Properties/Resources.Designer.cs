@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LiCalculatorWPF.Properties {
+namespace DotsAndBoxes.Properties {
     using System;
     
     

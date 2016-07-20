@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Box", "Box.csproj", "{6A874628-6C4F-4A48-AB05-162CC65A8163}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotsAndBoxes", "DotsAndBoxes.csproj", "{6A874628-6C4F-4A48-AB05-162CC65A8163}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot", "Dot\Dot.csproj", "{FC23314D-72EF-435A-AB09-A391385A1410}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{6A874628-6C4F-4A48-AB05-162CC65A8163}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A874628-6C4F-4A48-AB05-162CC65A8163}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A874628-6C4F-4A48-AB05-162CC65A8163}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC23314D-72EF-435A-AB09-A391385A1410}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC23314D-72EF-435A-AB09-A391385A1410}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC23314D-72EF-435A-AB09-A391385A1410}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC23314D-72EF-435A-AB09-A391385A1410}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

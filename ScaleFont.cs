@@ -7,7 +7,7 @@ using System.Windows.Interactivity;
 using System.Windows.Media;
 //http://stackoverflow.com/questions/15641473/how-to-automatically-scale-font-size-for-a-group-of-controls
 
-namespace LiCalculatorWPF
+namespace DotsAndBoxes
 {
     public class ScaleFontContentControlBehavior<S>
         : Behavior<Grid> where S : ContentControl
