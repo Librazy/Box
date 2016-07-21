@@ -1,10 +1,11 @@
 <!--  ReSharper disable once Xaml.RedundantNamespaceAlias  -->
-<Application x:Class="DotsAndBoxes.App"
+<Application x:Class="LiCalculatorWPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:DotsAndBoxes"
+             xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+             xmlns:local="clr-namespace:LiCalculatorWPF"
              d1p1:Ignorable="d"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
@@ -56,6 +57,39 @@
                                          Panel.ZIndex="1"
                                          Fill="{TemplateBinding Control.Foreground}"
                                          Stretch="Uniform" />
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="GridButton">
+            <Style.TargetType>
+                <x:Type TypeName="Button" />
+            </Style.TargetType>
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Panel.ZIndex" Value="1" />
+            <Setter Property="Foreground" Value="#FF2D956F" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <ControlTemplate.TargetType>
+                            <x:Type TypeName="Button" />
+                        </ControlTemplate.TargetType>
+                        <Border Name="Border"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Background="{TemplateBinding Control.Background}"
+                                BorderThickness="0"
+                                Focusable="False">
+                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <ed:RegularPolygon Width="30"
+                                                   Height="30"
+                                                   Fill="{TemplateBinding Control.Foreground}"
+                                                   InnerRadius="0.6"
+                                                   PointCount="5"
+                                                   Stretch="Uniform" />
+
                             </Grid>
                         </Border>
                     </ControlTemplate>

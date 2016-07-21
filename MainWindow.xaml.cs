@@ -5,7 +5,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using GalaSoft.MvvmLight.CommandWpf;
-
+using DotsAndBoxes.Dot;
 namespace DotsAndBoxes
 {
     /// <summary>
@@ -22,6 +22,9 @@ namespace DotsAndBoxes
             SetGrid(GameGrid, 4, 5);
             SetDot(GameGrid, 4, 5);
             SetLine(GameGrid, 4, 5);
+            Gaming.GridColorChanged
+                += SetGridColor;
+            Gaming.Init(4, 5);
         }
 
         /// <summary>
@@ -56,6 +59,7 @@ namespace DotsAndBoxes
 
         private void SetLine(Grid g, int h, int w)
         {
+            //横向
             for (var i = 0; i < h ; ++i) {
                 for (var j = 0; j < w - 1; ++j) {
                     var rec = new Button {
@@ -66,10 +70,11 @@ namespace DotsAndBoxes
                     rec.MouseEnter += LineButtonOnME;
                     rec.MouseLeave += LineButtonOnML;
                     Grid.SetRow(rec, 1 + i * 2);
-                    Grid.SetColumn(rec, 2 + j *2);
+                    Grid.SetColumn(rec, 2 + j * 2);
                     g.Children.Add(rec);
                 }
             }
+            //纵向
             for (var i = 0; i < h - 1; ++i)
             {
                 for (var j = 0; j < w ; ++j)
@@ -142,7 +147,15 @@ namespace DotsAndBoxes
             g.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(20, GridUnitType.Star) });
         }
 
-
+        private void SetGridColor(int h, int w)
+        {
+            var i = h*2;
+            var j = w*2;
+            var b = new Button { Style = (Style)FindResource("GridButton"),Foreground = new SolidColorBrush(Colors.SteelBlue) };
+            Grid.SetRow(b, i);
+            Grid.SetColumn(b, j);
+            GameGrid.Children.Add(b);
+        }
         #endregion
 
         #region Dependency Property Core
@@ -270,13 +283,36 @@ namespace DotsAndBoxes
         private RelayCommand<Button> _lineButtonClick;
 
         public RelayCommand<Button> LineButtonClick
-            => _lineButtonClick ?? (_lineButtonClick = new RelayCommand<Button>(s => AddLine(s, Colors.YellowGreen)));
+            => _lineButtonClick ?? (_lineButtonClick = new RelayCommand<Button>(s => AddLine(s, Colors.SteelBlue)));
 
         public void AddLine(Button s, Color t)
         {
             s.MouseEnter -= LineButtonOnME;
             s.MouseLeave -= LineButtonOnML;
             s.IsEnabled = false;
+            var i = Grid.GetRow(s);
+            var j = Grid.GetColumn(s);
+            int h, w;
+            if (i%2 == 1) {
+                h = (i - 1)/2 + 1;
+                w = (j - 2)/2 + 1;
+                if (h < 4) {
+                    Gaming.ChangeSquareStatus(h, w, Gaming.Direction.UP);
+                } else {
+                    Gaming.ChangeSquareStatus(h-1, w, Gaming.Direction.DOWN);
+                }
+            } else {
+                h = (i - 2)/2 + 1;
+                w = (j - 1)/2 + 1;
+                if (w < 5)
+                {
+                    Gaming.ChangeSquareStatus(h, w, Gaming.Direction.LEFT);
+                }
+                else
+                {
+                    Gaming.ChangeSquareStatus(h , w- 1, Gaming.Direction.RIGHT);
+                }
+            }
             SetBGTransform(s, ((SolidColorBrush)s.Foreground).Color , t, 0.5, true);
         }
 

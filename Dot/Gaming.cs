@@ -11,20 +11,23 @@
         }
         public static int PictureHeight, PictureWidth; //width为x轴 Height为y轴（以左上角为原点）
         public static int[,] SquareStatus; //每个方格的状态
-
-        public static void Init()
+        public delegate void ChangeGridColor(int y, int x);
+        public static event ChangeGridColor GridColorChanged;
+        public static void Init(int y,int x)
         {
+            PictureHeight = y;
+            PictureWidth = x;
             SquareStatus = new int[PictureWidth - 1, PictureHeight - 1];
-            for (var i = 0; i < PictureWidth - 1; i++) {
-                for (var j = 0; j < PictureHeight - 1; j++) {
-                    SquareStatus[i, j] = 1111; //顺序上下左右  ↑↓←→
+            for (var i = 0; i < PictureHeight - 1; i++) {
+                for (var j = 0; j < PictureWidth - 1; j++) {
+                    SquareStatus[j,i] = 1111; //顺序上下左右  ↑↓←→
                 }
             }
         }
 
-        public static bool ChangeSquareStatus(int x, int y, Direction direction)
+        public static bool ChangeSquareStatus(int y, int x, Direction direction)
         {
-            if (!IsClickable(x, y, direction)) return false; //改变失败
+            if (!IsClickable(y, x, direction)) return false; //改变失败
             switch (direction) {
                 case Direction.UP:
                     SquareStatus[x - 1, y - 1] = SquareStatus[x - 1, y - 1] - 1000;
@@ -34,7 +37,7 @@
                     break;
                 case Direction.DOWN:
                     SquareStatus[x - 1, y - 1] = SquareStatus[x - 1, y - 1] - 100;
-                    if (y != PictureWidth - 1) {
+                    if (y != PictureHeight - 1) {
                         SquareStatus[x - 1, y] = SquareStatus[x - 1, y] - 1000;
                     }
                     break;
@@ -46,15 +49,16 @@
                     break;
                 case Direction.RIGHT:
                     SquareStatus[x - 1, y - 1] = SquareStatus[x - 1, y - 1] - 1;
-                    if (x != PictureHeight - 1) {
+                    if (x != PictureWidth - 1) {
                         SquareStatus[x, y - 1] = SquareStatus[x, y - 1] - 10;
                     }
                     break;
             }
+            JudgeChangeColor(y , x, direction, 1);
             return true; //改变成功
         }
 
-        public static bool IsClickable(int x, int y, Direction direction)
+        public static bool IsClickable(int y, int x, Direction direction)
         {
             var temp = SquareStatus[x - 1, y - 1];
             var right = temp%10;
@@ -89,55 +93,57 @@
             return false;
         }
 
-        public static void JudgeChangeColor(int x, int y, Direction direction, int playerNumber)
+        public static void JudgeChangeColor(int y, int x, Direction direction, int playerNumber)
         {
             switch (direction) {
                 case Direction.UP:
                     if (SquareStatus[x - 1, y - 1] == 0) {
-                        ChangeColor(playerNumber, x, y);
+                        ChangeColor(playerNumber,y,x);
                     }
                     if (y != 1) {
                         if (SquareStatus[x - 1, y - 2] == 0) {
-                            ChangeColor(playerNumber, x, y - 1);
+                            ChangeColor(playerNumber, y - 1, x);
                         }
                     }
                     break;
                 case Direction.DOWN:
                     if (SquareStatus[x - 1, y - 1] == 0) {
-                        ChangeColor(playerNumber, x, y);
+                        ChangeColor(playerNumber, y, x);
                     }
-                    if (y != PictureWidth - 1) {
+                    if (y != PictureHeight - 1) {
                         if (SquareStatus[x - 1, y] == 0) {
-                            ChangeColor(playerNumber, x, y + 1);
+                            ChangeColor(playerNumber, y + 1, x);
                         }
                     }
                     break;
                 case Direction.LEFT:
                     if (SquareStatus[x - 1, y - 1] == 0) {
-                        ChangeColor(playerNumber, x, y);
+                        ChangeColor(playerNumber, y, x);
                     }
                     if (x != 1) {
                         if (SquareStatus[x - 2, y - 1] == 0) {
-                            ChangeColor(playerNumber, x - 1, y);
+                            ChangeColor(playerNumber, y, x - 1);
                         }
                     }
                     break;
                 case Direction.RIGHT:
                     if (SquareStatus[x - 1, y - 1] == 0) {
-                        ChangeColor(playerNumber, x, y);
+                        ChangeColor(playerNumber, y, x);
                     }
-                    if (x != PictureHeight - 1) {
+                    if (x != PictureWidth - 1) {
                         if (SquareStatus[x, y - 1] == 0) {
-                            ChangeColor(playerNumber, x + 1, y);
+                            ChangeColor(playerNumber, y, x + 1);
                         }
                     }
                     break;
             }
         }
 
-        public static void ChangeColor(int playerNumber, int x, int y)
+        public static void ChangeColor(int playerNumber, int y, int x)
         {
+
             SquareStatus[x - 1, y - 1] = playerNumber + 2;
+            GridColorChanged?.Invoke(y ,x);
             //变色 这个格子变成玩家X的
         }
 
