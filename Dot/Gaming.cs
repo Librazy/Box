@@ -12,7 +12,10 @@
         public static int PictureHeight, PictureWidth; //width为x轴 Height为y轴（以左上角为原点）
         public static int[,] SquareStatus; //每个方格的状态
         public delegate void ChangeGridColor(int y, int x);
+        public delegate void SwitchTurn();
         public static event ChangeGridColor GridColorChanged;
+        public static event SwitchTurn TurnSwitched;
+        public static bool Turn { get; set; }
         public static void Init(int y,int x)
         {
             PictureHeight = y;
@@ -54,7 +57,10 @@
                     }
                     break;
             }
-            JudgeChangeColor(y , x, direction, 1);
+            if (!JudgeChangeColor(y, x, direction, 1)) {
+                TurnSwitched?.Invoke();
+                Turn = false;
+            }
             return true; //改变成功
         }
 
@@ -93,50 +99,60 @@
             return false;
         }
 
-        public static void JudgeChangeColor(int y, int x, Direction direction, int playerNumber)
+        public static bool JudgeChangeColor(int y, int x, Direction direction, int playerNumber)
         {
+            bool combo = false;
             switch (direction) {
                 case Direction.UP:
                     if (SquareStatus[x - 1, y - 1] == 0) {
-                        ChangeColor(playerNumber,y,x);
+                        ChangeColor(playerNumber, y, x);
+                        combo = true;
                     }
                     if (y != 1) {
                         if (SquareStatus[x - 1, y - 2] == 0) {
                             ChangeColor(playerNumber, y - 1, x);
+                            combo = true;
                         }
                     }
                     break;
                 case Direction.DOWN:
                     if (SquareStatus[x - 1, y - 1] == 0) {
                         ChangeColor(playerNumber, y, x);
+                        combo = true;
                     }
                     if (y != PictureHeight - 1) {
                         if (SquareStatus[x - 1, y] == 0) {
                             ChangeColor(playerNumber, y + 1, x);
+                            combo = true;
                         }
                     }
                     break;
                 case Direction.LEFT:
                     if (SquareStatus[x - 1, y - 1] == 0) {
                         ChangeColor(playerNumber, y, x);
+                        combo = true;
                     }
                     if (x != 1) {
                         if (SquareStatus[x - 2, y - 1] == 0) {
                             ChangeColor(playerNumber, y, x - 1);
+                            combo = true;
                         }
                     }
                     break;
                 case Direction.RIGHT:
                     if (SquareStatus[x - 1, y - 1] == 0) {
                         ChangeColor(playerNumber, y, x);
+                        combo = true;
                     }
                     if (x != PictureWidth - 1) {
                         if (SquareStatus[x, y - 1] == 0) {
                             ChangeColor(playerNumber, y, x + 1);
+                            combo = true;
                         }
                     }
                     break;
             }
+            return combo;
         }
 
         public static void ChangeColor(int playerNumber, int y, int x)

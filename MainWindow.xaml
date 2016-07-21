@@ -89,7 +89,224 @@
                 BorderBrush="{x:Static SystemParameters.WindowGlassBrush}"
                 BorderThickness="1">
             <Grid Margin="0,30,0,0">
-                <Grid x:Name="GameGrid" Margin="0" />
+                <Grid.RowDefinitions>
+                    <RowDefinition x:Name="CreatingRow" Height="0*" />
+                    <RowDefinition x:Name="ConnectingRow" Height="100*" />
+                    <RowDefinition x:Name="IntroRow" Height="0*" />
+                    <RowDefinition x:Name="GamingRow" Height="0*" />
+                </Grid.RowDefinitions>
+
+                <Grid x:Name="CreatingGrid" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0"
+                           Grid.RowSpan="2"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="3"
+                           Margin="0,20,0,0"
+                           Content="创建游戏："
+                           FontSize="36" />
+                    <Label Grid.Row="2"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           Content="地图大小：" />
+                    <Button Grid.Row="2"
+                            Grid.RowSpan="2"
+                            Grid.Column="5"
+                            Grid.ColumnSpan="2"
+                            Background="AliceBlue"
+                            Content="创建房间"
+                            Style="{StaticResource CtrlButton}" />
+                    <TextBox Grid.Row="3" Grid.Column="1">
+                        <!--<i:Interaction.Behaviors>
+                            <local:TextBoxInputRegExBehaviour EmptyValue="0"
+                                                              MaxLength="2"
+                                                              RegularExpression="^\d+$" />
+                        </i:Interaction.Behaviors>-->
+                    </TextBox>
+                    <Label Grid.Row="3"
+                           Grid.Column="2"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Content="X"
+                           FontSize="30" />
+                    <TextBox Grid.Row="3" Grid.Column="3">
+                        <!--<i:Interaction.Behaviors>
+                            <local:TextBoxInputRegExBehaviour EmptyValue="0"
+                                                              MaxLength="2"
+                                                              RegularExpression="^\d+$" />
+                        </i:Interaction.Behaviors>-->
+                    </TextBox>
+                    <Label Grid.Row="4"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           Content="监听IP：" />
+                    <TextBox Grid.Row="5"
+                             Grid.Column="1"
+                             Grid.ColumnSpan="6">
+                        <!--<i:Interaction.Behaviors>
+                            <local:TextBoxInputRegExBehaviour EmptyValue="0"
+                                                              MaxLength="2"
+                                                              RegularExpression="^\d+$" />
+                        </i:Interaction.Behaviors>-->
+                    </TextBox>
+                    <Label Grid.Row="6"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           Content="昵称：" />
+                    <TextBox Grid.Row="7"
+                             Grid.Column="1"
+                             Grid.ColumnSpan="6">
+                        <!--<i:Interaction.Behaviors>
+                            <local:TextBoxInputRegExBehaviour EmptyValue="0"
+                                                              MaxLength="2"
+                                                              RegularExpression="^\d+$" />
+                        </i:Interaction.Behaviors>-->
+                    </TextBox>
+                </Grid>
+                <Grid x:Name="ConnectingGrid" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0"
+                           Grid.RowSpan="2"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="3"
+                           Margin="0,20,0,0"
+                           Content="建立连接："
+                           FontSize="36" />
+                    <Label Grid.Row="2"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           Content="先后手：" />
+                    <Button Grid.Row="2"
+                            Grid.RowSpan="2"
+                            Grid.Column="5"
+                            Grid.ColumnSpan="2"
+                            Background="AliceBlue"
+                            Content="创建房间"
+                            Style="{StaticResource CtrlButton}" />
+                    <Grid Grid.Row="3"
+                          Grid.Column="1"
+                          Grid.ColumnSpan="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <RadioButton Grid.Column="0"
+                                     Content="先"
+                                     Style="{StaticResource MDRadioButton}" />
+                        <RadioButton Grid.Column="1"
+                                     Content="后"
+                                     Style="{StaticResource MDRadioButton}" />
+                    </Grid>
+                    <Label Grid.Row="4"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           Content="监听IP：" />
+                    <TextBox Grid.Row="5"
+                             Grid.Column="1"
+                             Grid.ColumnSpan="6"
+                             Padding="3">
+                        <!--<i:Interaction.Behaviors>
+                            <local:TextBoxInputRegExBehaviour EmptyValue="0"
+                                                              MaxLength="2"
+                                                              RegularExpression="^\d+$" />
+                        </i:Interaction.Behaviors>-->
+                    </TextBox>
+                    <Label Grid.Row="6"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           Content="昵称：" />
+                    <TextBox Grid.Row="7"
+                             Grid.Column="1"
+                             Grid.ColumnSpan="6"
+                             Padding="3">
+                        <!--<i:Interaction.Behaviors>
+                            <local:TextBoxInputRegExBehaviour EmptyValue="0"
+                                                              MaxLength="2"
+                                                              RegularExpression="^\d+$" />
+                        </i:Interaction.Behaviors>-->
+                    </TextBox>
+                </Grid>
+                <Grid x:Name="GameGrid"
+                      Grid.Row="2"
+                      Margin="0" />
+                <Grid x:Name="IntroGrid" Grid.Row="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Row="2"
+                            Grid.RowSpan="2"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Background="Snow"
+                            Style="{StaticResource CtrlButton}">
+                        <TextBlock FontSize="36" Text="创建游戏" />
+                    </Button>
+                    <Button Grid.Row="2"
+                            Grid.RowSpan="2"
+                            Grid.Column="4"
+                            Grid.ColumnSpan="2"
+                            Background="Snow"
+                            Click="IntroTGaming"
+                            Style="{StaticResource CtrlButton}">
+                        <TextBlock FontSize="36" Text="建立连接" />
+                    </Button>
+                </Grid>
             </Grid>
         </Border>
         <TextBlock x:Name="textBlock"

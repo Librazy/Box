@@ -6,6 +6,8 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using GalaSoft.MvvmLight.CommandWpf;
 using DotsAndBoxes.Dot;
+using LiCalculatorWPF;
+
 namespace DotsAndBoxes
 {
     /// <summary>
@@ -19,12 +21,6 @@ namespace DotsAndBoxes
         {
             InitializeComponent();
             MWindow.SourceInitialized += WinSourceInitialized;
-            SetGrid(GameGrid, 4, 5);
-            SetDot(GameGrid, 4, 5);
-            SetLine(GameGrid, 4, 5);
-            Gaming.GridColorChanged
-                += SetGridColor;
-            Gaming.Init(4, 5);
         }
 
         /// <summary>
@@ -56,6 +52,16 @@ namespace DotsAndBoxes
         #endregion
 
         #region Gaming Function
+
+        private void InitGame(int h,int w)
+        {
+            SetBox(GameGrid, h, w);
+            SetDot(GameGrid, h, w);
+            SetLine(GameGrid, h, w);
+            Gaming.GridColorChanged
+                += SetBoxColor;
+            Gaming.Init(h, w);
+        }
 
         private void SetLine(Grid g, int h, int w)
         {
@@ -108,7 +114,7 @@ namespace DotsAndBoxes
             }
         }
         
-        private void SetGrid(Grid g, int h, int w)
+        private void SetBox(Grid g, int h, int w)
         {
             g.RowDefinitions.Clear();
             g.ColumnDefinitions.Clear();
@@ -147,7 +153,7 @@ namespace DotsAndBoxes
             g.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(20, GridUnitType.Star) });
         }
 
-        private void SetGridColor(int h, int w)
+        private void SetBoxColor(int h, int w)
         {
             var i = h*2;
             var j = w*2;
@@ -274,6 +280,26 @@ namespace DotsAndBoxes
         private void LineButtonOnML(object sender, MouseEventArgs e)
         {
             SetBGTransform((Button)sender, Color.FromArgb(0xFF, 78, 201, 178), Color.FromArgb(0x99, 78, 201, 178), 0.3, true);
+        }
+
+        private void IntroTGaming(object sender, RoutedEventArgs routedEventArgs)
+        {
+            ((Button) sender).IsEnabled = false;
+            InitGame(4, 5);
+            var shrinkAnimation = new GridLengthAnimation
+            {
+                From = new GridLength(100, GridUnitType.Star),
+                To = new GridLength(0, GridUnitType.Star),
+                Duration = new Duration(TimeSpan.FromSeconds(1.5))
+            };
+            IntroRow.BeginAnimation(RowDefinition.HeightProperty, shrinkAnimation, HandoffBehavior.Compose);
+            var expandAnimation = new GridLengthAnimation
+            {
+                From = new GridLength(0, GridUnitType.Star),
+                To = new GridLength(100, GridUnitType.Star),
+                Duration = new Duration(TimeSpan.FromSeconds(1.5))
+            };
+            GamingRow.BeginAnimation(RowDefinition.HeightProperty, expandAnimation, HandoffBehavior.Compose);
         }
 
         #endregion

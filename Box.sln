@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotsAndBoxes", "DotsAndBoxe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot", "Dot\Dot.csproj", "{FC23314D-72EF-435A-AB09-A391385A1410}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuangXiLib", "HuangXiLib\HuangXiLib.csproj", "{BA485614-E408-4D75-87C3-C700BCF5AB84}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{FC23314D-72EF-435A-AB09-A391385A1410}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC23314D-72EF-435A-AB09-A391385A1410}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC23314D-72EF-435A-AB09-A391385A1410}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA485614-E408-4D75-87C3-C700BCF5AB84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA485614-E408-4D75-87C3-C700BCF5AB84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA485614-E408-4D75-87C3-C700BCF5AB84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA485614-E408-4D75-87C3-C700BCF5AB84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
